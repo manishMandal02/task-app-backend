@@ -17,7 +17,6 @@ const projectSchema = mongoose.Schema(
     },
     coverImage: {
       type: String,
-      required: true,
     },
     users: [
       {
