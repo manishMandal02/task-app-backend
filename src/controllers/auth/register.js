@@ -24,7 +24,7 @@ module.exports = expressAsyncHandler(async (req, res) => {
 
   if (user) {
     //sending welcome mail
-    const [data, error] = welcomeMail({ email: user.email, name: user.fullName });
+    // const [data, error] = welcomeMail({ email: user.email, name: user.fullName });
     res.status(201);
     res.json({
       _id: user._id,
