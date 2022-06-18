@@ -2,16 +2,16 @@ const expressAsyncHandler = require('express-async-handler');
 const { Task } = require('../../models/task.model');
 
 const createTask = expressAsyncHandler(async (req, res) => {
-  const { title, desc, projectId, assignedBy, assignedTo, category, columnId } = req.body;
+  const { title, desc, projectId, assignedBy, assignedTo, category, column } = req.body;
 
-  const task = Task.create({
+  const task = await Task.create({
     title,
     desc,
     projectId,
     assignedBy,
     assignedTo,
     category,
-    columnId,
+    column,
   });
 
   if (task) {
@@ -26,21 +26,21 @@ const createTask = expressAsyncHandler(async (req, res) => {
 const deleteTask = expressAsyncHandler(async (req, res) => {
   const id = req.query.id;
 
-  const task = Task.findById(id);
+  const task = await Task.findById(id);
   if (task) {
     await task.remove();
     res.status(201);
     res.json({ message: 'task deleted', status: 'success' });
-} else {
+  } else {
     res.status(500);
     throw new Error('Something went wrong, Please try again.');
-}
+  }
 });
 
 const getATask = expressAsyncHandler(async (req, res) => {
   const id = req.query.id;
 
-  const task = Task.findById(id);
+  const task = await Task.findById(id);
 
   if (task) {
     res.status(201);
@@ -54,7 +54,7 @@ const getATask = expressAsyncHandler(async (req, res) => {
 const getAllUserTask = expressAsyncHandler(async (req, res) => {
   const id = req.query.id;
 
-  const task = Task.findById({ assignedTo: { $in: id } });
+  const task = await Task.findById({ assignedTo: { $in: id } });
 
   if (task) {
     res.status(201);

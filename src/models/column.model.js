@@ -8,6 +8,9 @@ const columnSchema = mongoose.Schema(
     },
     color: {
       type: String,
+    },
+    project: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     tasks: [

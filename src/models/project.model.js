@@ -32,8 +32,8 @@ const projectSchema = mongoose.Schema(
     ],
     columns: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Column',
+        type: String,
+        require: true,
       },
     ],
     categories: [

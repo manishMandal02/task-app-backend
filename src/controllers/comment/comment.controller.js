@@ -5,7 +5,7 @@ const createComment = expressAsyncHandler(async (req, res) => {
   const { comment, taskId } = req.body;
   const userId = req.user._id;
 
-  const commentCreated = Comment.create({
+  const commentCreated = await Comment.create({
     comment,
     user: userId,
     task: taskId,
@@ -34,7 +34,7 @@ const getAllTaskComment = expressAsyncHandler(async (req, res) => {
 const deleteComment = expressAsyncHandler(async (req, res) => {
   const id = req.query.id;
 
-  const comment = Comment.findById(id);
+  const comment = await Comment.findById(id);
   if (comment) {
     await comment.remove();
     res.status(201);

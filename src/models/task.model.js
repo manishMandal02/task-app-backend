@@ -28,14 +28,13 @@ const taskSchema = mongoose.Schema(
       },
     ],
     column: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Column',
+      type: String,
+      require: true,
     },
     category: {
       type: String,
       required: true,
-    }
+    },
   },
   {
     timestamps: true,

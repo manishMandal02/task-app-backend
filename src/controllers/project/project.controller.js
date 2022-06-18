@@ -5,7 +5,7 @@ const createProject = expressAsyncHandler(async (req, res) => {
   const { title, desc } = req.body;
   const userId = req.user._id;
 
-  const project = Project.create({
+  const project = await Project.create({
     title,
     desc,
     owner: userId,
@@ -22,7 +22,7 @@ const createProject = expressAsyncHandler(async (req, res) => {
 const getAProject = expressAsyncHandler(async (req, res) => {
   const id = req.query.id;
 
-  const project = Project.findById(id);
+  const project = await Project.findById(id);
   if (project) {
     res.status(201);
     res.json({ status: 'success', project });
@@ -35,7 +35,7 @@ const getAProject = expressAsyncHandler(async (req, res) => {
 const getAllUserProject = expressAsyncHandler(async (req, res) => {
   const id = req.user._id;
 
-  const project = Project.find({ $or: [{ owner: { $in: id } }, { users: { $in: id } }] });
+  const project = await Project.find({ $or: [{ owner: { $in: id } }, { users: { $in: id } }] });
   if (project) {
     res.status(201);
     res.json({ status: 'success', project });
@@ -48,5 +48,5 @@ const getAllUserProject = expressAsyncHandler(async (req, res) => {
 module.exports = {
   createProject,
   getAProject,
-  getAllUserProject,
+  getAllProject,
 };
