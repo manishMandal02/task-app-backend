@@ -24,7 +24,7 @@ const createTask = expressAsyncHandler(async (req, res) => {
 });
 
 const deleteTask = expressAsyncHandler(async (req, res) => {
-  const id = req.query.id;
+  const id = req.params.id;
 
   const task = await Task.findById(id);
   if (task) {
@@ -38,7 +38,7 @@ const deleteTask = expressAsyncHandler(async (req, res) => {
 });
 
 const getATask = expressAsyncHandler(async (req, res) => {
-  const id = req.query.id;
+  const id = req.params.id;
 
   const task = await Task.findById(id);
 
@@ -52,7 +52,7 @@ const getATask = expressAsyncHandler(async (req, res) => {
 });
 
 const getAllUserTask = expressAsyncHandler(async (req, res) => {
-  const id = req.query.id;
+  const id = req.params.id;
 
   const task = await Task.findById({ assignedTo: { $in: id } });
 

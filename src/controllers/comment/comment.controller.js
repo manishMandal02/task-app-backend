@@ -20,7 +20,7 @@ const createComment = expressAsyncHandler(async (req, res) => {
 });
 
 const getAllTaskComment = expressAsyncHandler(async (req, res) => {
-  const taskId = req.query.id;
+  const taskId = req.params.id;
 
   const comment = Comment.find({ taskId: taskId });
   if (comment) {
@@ -32,7 +32,7 @@ const getAllTaskComment = expressAsyncHandler(async (req, res) => {
   }
 });
 const deleteComment = expressAsyncHandler(async (req, res) => {
-  const id = req.query.id;
+  const id = req.params.id;
 
   const comment = await Comment.findById(id);
   if (comment) {
