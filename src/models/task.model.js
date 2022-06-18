@@ -10,7 +10,11 @@ const taskSchema = mongoose.Schema(
       type: String,
       required: false,
     },
-
+    project: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Project',
+    },
     assignedBy: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

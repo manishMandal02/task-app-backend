@@ -4,7 +4,10 @@ const colors = require('colors');
 const cors = require('cors');
 
 const { connectDB } = require('./src/config/db');
-const authRoutes = require('./src/routes/auth.route');
+const authRoutes = require('./src/routes/Auth/auth.route');
+const projectRoute = require('./src/routes/project/project.route');
+const taskRoutes = require('./src/routes/task/task.route');
+const commentRoutes = require('./src/routes/comment/comment.route');
 const { notFoundError, errorHandler } = require('./src/middleware/error');
 
 dotenv.config();
@@ -22,6 +25,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/project', projectRoute);
+app.use('/api/task', taskRoutes);
+app.use('/api/comment', commentRoutes);
 
 app.use(notFoundError);
 app.use(errorHandler);

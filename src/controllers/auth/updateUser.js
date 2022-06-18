@@ -3,7 +3,7 @@ const { User } = require('../../models/user.model');
 const { generateToken } = require('../../utils/generateToken');
 
 module.exports = expressAsyncHandler(async (req, res) => {
-  const id = req.query.id;
+  const id = req.user._id;
   const { firstName, lastName, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
