@@ -39,8 +39,7 @@ const projectSchema = mongoose.Schema(
     ],
     categories: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        type: String,
       },
     ],
   },

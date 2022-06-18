@@ -33,10 +33,9 @@ const taskSchema = mongoose.Schema(
       ref: 'Column',
     },
     category: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: true,
-      ref: 'Category',
-    },
+    }
   },
   {
     timestamps: true,
