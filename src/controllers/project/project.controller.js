@@ -9,6 +9,7 @@ const createProject = expressAsyncHandler(async (req, res) => {
     title,
     desc,
     owner: userId,
+    columns: ['Todo', 'In Progress', 'Review', 'Done'],
   });
   if (project) {
     res.status(201);

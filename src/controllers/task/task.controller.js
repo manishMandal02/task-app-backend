@@ -1,4 +1,5 @@
 const expressAsyncHandler = require('express-async-handler');
+const { Project } = require('../../models/project.model');
 const { Task } = require('../../models/task.model');
 
 const createTask = expressAsyncHandler(async (req, res) => {
@@ -15,6 +16,9 @@ const createTask = expressAsyncHandler(async (req, res) => {
   });
 
   if (task) {
+    const projectTasks = await Project.findById(project).select('tasks');
+    projectTasks.push([...projectTasks, task]);
+    await projectTasks.save();
     res.status(201);
     res.json({ message: 'task added', status: 'success' });
   } else {
