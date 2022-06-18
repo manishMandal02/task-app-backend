@@ -2,12 +2,12 @@ const expressAsyncHandler = require('express-async-handler');
 const { Task } = require('../../models/task.model');
 
 const createTask = expressAsyncHandler(async (req, res) => {
-  const { title, desc, projectId, assignedBy, assignedTo, category, column } = req.body;
+  const { title, desc, project, assignedBy, assignedTo, category, column } = req.body;
 
   const task = await Task.create({
     title,
     desc,
-    projectId,
+    project,
     assignedBy,
     assignedTo,
     category,
