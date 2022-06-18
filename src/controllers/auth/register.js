@@ -1,6 +1,6 @@
-const expressAsyncHandler = require('express-async-handler');
-const generateToken = require('../../utils/generateToken');
-const { User } = require('../../models/user.model');
+const expressAsyncHandler = require("express-async-handler");
+const generateToken = require("../../utils/generateToken");
+const { User } = require("../../models/user.model");
 
 module.exports = expressAsyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -9,14 +9,14 @@ module.exports = expressAsyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400);
-    throw new Error('A user already exists with this email.');
+    throw new Error("A user already exists with this email.");
   }
 
   const user = await User.create({
     firstName,
     lastName,
     profilePic:
-      'https://res.cloudinary.com/inskillz/image/upload/v1618675741/inskillz/instructor_default_pic.png',
+      "https://res.cloudinary.com/inskillz/image/upload/v1618675741/inskillz/instructor_default_pic.png",
 
     email,
     password,
@@ -35,6 +35,6 @@ module.exports = expressAsyncHandler(async (req, res) => {
     });
   } else {
     res.status(500);
-    throw new Error('Something went wrong, Please try again');
+    throw new Error("Something went wrong, Please try again");
   }
 });

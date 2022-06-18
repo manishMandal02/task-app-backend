@@ -1,9 +1,10 @@
-const expressAsyncHandler = require('express-async-handler');
-const { Project } = require('../../models/project.model');
-const { Task } = require('../../models/task.model');
+const expressAsyncHandler = require("express-async-handler");
+const { Project } = require("../../models/project.model");
+const { Task } = require("../../models/task.model");
 
 const createTask = expressAsyncHandler(async (req, res) => {
-  const { title, desc, project, assignedBy, assignedTo, category, column } = req.body;
+  const { title, desc, project, assignedBy, assignedTo, category, column } =
+    req.body;
 
   const task = await Task.create({
     title,
@@ -16,14 +17,14 @@ const createTask = expressAsyncHandler(async (req, res) => {
   });
 
   if (task) {
-    const projectTasks = await Project.findById(project).select('tasks');
-    projectTasks.push([...projectTasks, task]);
+    const projectTasks = await Project.findById(project);
+    projectTasks.tasks.push([...projectTasks.tasks, task._id]);
     await projectTasks.save();
     res.status(201);
-    res.json({ message: 'task added', status: 'success' });
+    res.json({ message: "task added", status: "success" });
   } else {
     res.status(500);
-    throw new Error('Something went wrong, Please try again.');
+    throw new Error("Something went wrong, Please try again.");
   }
 });
 
@@ -34,10 +35,10 @@ const deleteTask = expressAsyncHandler(async (req, res) => {
   if (task) {
     await task.remove();
     res.status(201);
-    res.json({ message: 'task deleted', status: 'success' });
+    res.json({ message: "task deleted", status: "success" });
   } else {
     res.status(500);
-    throw new Error('Something went wrong, Please try again.');
+    throw new Error("Something went wrong, Please try again.");
   }
 });
 
@@ -48,10 +49,10 @@ const getATask = expressAsyncHandler(async (req, res) => {
 
   if (task) {
     res.status(201);
-    res.json({ task, status: 'success' });
+    res.json({ task, status: "success" });
   } else {
     res.status(500);
-    throw new Error('Something went wrong, Please try again.');
+    throw new Error("Something went wrong, Please try again.");
   }
 });
 
@@ -62,10 +63,10 @@ const getAllUserTask = expressAsyncHandler(async (req, res) => {
 
   if (task) {
     res.status(201);
-    res.json({ task, status: 'success' });
+    res.json({ task, status: "success" });
   } else {
     res.status(500);
-    throw new Error('No task found.');
+    throw new Error("No task found.");
   }
 });
 
