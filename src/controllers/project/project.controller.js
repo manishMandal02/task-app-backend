@@ -48,5 +48,5 @@ const getAllUserProject = expressAsyncHandler(async (req, res) => {
 module.exports = {
   createProject,
   getAProject,
-  getAllProject,
+  getAllUserProject,
 };
