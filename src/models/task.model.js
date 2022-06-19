@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const taskSchema = mongoose.Schema(
   {
@@ -13,17 +13,17 @@ const taskSchema = mongoose.Schema(
     project: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'Project',
+      ref: "Project",
     },
     assignedBy: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: "User",
     },
     assignedTo: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
       },
     ],
     column: {
@@ -34,12 +34,18 @@ const taskSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-const Task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model("Task", taskSchema);
 
 module.exports = { Task };
