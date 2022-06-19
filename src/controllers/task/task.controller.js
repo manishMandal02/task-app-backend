@@ -18,7 +18,9 @@ const createTask = expressAsyncHandler(async (req, res) => {
 
   if (task) {
     const projectTasks = await Project.findById(project);
-    projectTasks.tasks.push([...projectTasks.tasks, task._id]);
+    console.log(projectTasks.tasks[0]);
+    console.log(task._id);
+    projectTasks.tasks.push(task._id);
     await projectTasks.save();
     res.status(201);
     res.json({ message: "task added", status: "success" });
